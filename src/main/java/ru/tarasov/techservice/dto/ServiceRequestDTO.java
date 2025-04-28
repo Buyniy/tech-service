@@ -3,11 +3,9 @@ package ru.tarasov.techservice.dto;
 public class ServiceRequestDTO {
 
     private String name;
-    private Long id;
 
-    public ServiceRequestDTO(String name, Long id) {
+    public ServiceRequestDTO(String name) {
         this.name = name;
-        this.id = id;
     }
 
     public String getName() {
@@ -16,13 +14,5 @@ public class ServiceRequestDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 }
