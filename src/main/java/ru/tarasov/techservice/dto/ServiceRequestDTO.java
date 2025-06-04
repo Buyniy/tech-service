@@ -1,18 +1,15 @@
 package ru.tarasov.techservice.dto;
 
-public class ServiceRequestDTO {
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
-    private String name;
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+public record ServiceRequestDTO(
 
-    public ServiceRequestDTO(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
+        @NotBlank
+        @NotEmpty
+        String name
+) {
 }
