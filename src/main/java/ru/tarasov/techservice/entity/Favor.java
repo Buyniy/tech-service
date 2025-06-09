@@ -1,6 +1,7 @@
 package ru.tarasov.techservice.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -18,10 +19,12 @@ public class Favor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "price")
+    @NotNull
+    @Column(name = "price", nullable = false)
     private Double price;
 
     @OneToMany

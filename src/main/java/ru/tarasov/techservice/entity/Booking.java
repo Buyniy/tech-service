@@ -2,8 +2,10 @@ package ru.tarasov.techservice.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.*;
-import ru.tarasov.techservice.constants.BookingStatus;
+import ru.tarasov.techservice.constant.BookingStatus;
 
 import java.time.LocalDateTime;
 
@@ -21,15 +23,23 @@ public class Booking {
     private Long id;
 
     @NotNull
-    @Column(nullable = false)
+    @Column(name = "time", nullable = false)
     private LocalDateTime bookingTime;
 
     @NotNull
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "status", nullable = false)
     private BookingStatus status;
 
     @ManyToOne
     @JoinColumn(name = "favor_id", nullable = false)
     private Favor favor;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private ApplicationUser user;
+
+    @PositiveOrZero
+    @Column(name = "discount")
+    private Double discount;
 }

@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.tarasov.techservice.dto.FavorRequestDTO;
 import ru.tarasov.techservice.dto.FavorResponseDTO;
-import ru.tarasov.techservice.exceptions.FavorException;
+import ru.tarasov.techservice.exception.FavorException;
 import ru.tarasov.techservice.service.FavorService;
 
 import java.net.URI;

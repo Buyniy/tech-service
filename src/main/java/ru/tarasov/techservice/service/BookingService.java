@@ -2,18 +2,21 @@ package ru.tarasov.techservice.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.tarasov.techservice.constants.BookingStatus;
+import ru.tarasov.techservice.constant.BookingStatus;
 import ru.tarasov.techservice.dto.BookingRequestDTO;
 import ru.tarasov.techservice.dto.BookingResponseDTO;
 import ru.tarasov.techservice.dto.FavorResponseDTO;
 import ru.tarasov.techservice.dto.RevenueReportDTO;
+import ru.tarasov.techservice.entity.ApplicationUser;
 import ru.tarasov.techservice.entity.Booking;
 import ru.tarasov.techservice.entity.Favor;
-import ru.tarasov.techservice.exceptions.BookingException;
-import ru.tarasov.techservice.exceptions.FavorException;
+import ru.tarasov.techservice.exception.BookingException;
+import ru.tarasov.techservice.exception.FavorException;
 import ru.tarasov.techservice.mapper.BookingMapper;
 import ru.tarasov.techservice.mapper.FavorMapper;
+import ru.tarasov.techservice.repository.ApplicationUserRepository;
 import ru.tarasov.techservice.repository.BookingRepository;
 import ru.tarasov.techservice.repository.FavorRepository;
 
@@ -26,15 +29,21 @@ public class BookingService {
 
     private final BookingRepository bookingRepository;
     private final FavorRepository favorRepository;
+    private final ApplicationUserRepository userRepository;
     private final BookingMapper bookingMapper;
     private final FavorMapper favorMapper;
 
     public Long createBooking(BookingRequestDTO bookingRequest) {
         Favor favor = favorRepository.findById(bookingRequest.favorId())
-                .orElseThrow(() -> new FavorException(HttpStatus.NOT_FOUND, "Услуга не найдена"));
+                .orElseThrow(() -> new FavorException(HttpStatus.NOT_FOUND, "Запись не найдена"));
+
+        ApplicationUser user = userRepository.findByUsername(bookingRequest.username())
+                .orElseThrow(() -> new UsernameNotFoundException("Пользователь не найден"));
 
         Booking booking = bookingMapper.mapToEntity(bookingRequest);
         booking.setFavor(favor);
+        booking.setUser(user);
+        booking.setStatus(BookingStatus.NEW);
 
         bookingRepository.save(booking);
 

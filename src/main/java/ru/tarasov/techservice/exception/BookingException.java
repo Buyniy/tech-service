@@ -1,4 +1,4 @@
-package ru.tarasov.techservice.exceptions;
+package ru.tarasov.techservice.exception;
 
 import lombok.Getter;
 import lombok.Setter;
