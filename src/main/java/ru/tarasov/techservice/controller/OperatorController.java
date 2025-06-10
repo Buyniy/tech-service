@@ -1,5 +1,6 @@
 package ru.tarasov.techservice.controller;
 
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +33,7 @@ public class OperatorController {
         return "operator/edit";
     }
 
+    @Secured("ROLE_OPERATOR")
     @GetMapping("/booking")
     public String edit(Booking booking) {
         return "operator/booking";
@@ -64,6 +66,7 @@ public class OperatorController {
         }
     }
 
+    @Secured("ROLE_OPERATOR")
     @PostMapping("/booking")
     public String editBooking(Booking booking) {
         operatorService.updateBooking(booking);
