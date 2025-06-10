@@ -1,11 +1,12 @@
 package ru.tarasov.techservice.controller;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import ru.tarasov.techservice.entity.ApplicationUser;
+import ru.tarasov.techservice.entity.Token;
 import ru.tarasov.techservice.service.AccountService;
 
 import javax.security.auth.login.AccountException;
@@ -28,6 +29,17 @@ public class AccountController {
     @GetMapping("/login")
     public String login() {
         return "account/login";
+    }
+
+    @ResponseBody
+    @PostMapping("/login")
+    public Token loginAccount(@RequestParam("application_user_username") String username,
+                              @RequestParam("application_user_password") String password) {
+        try {
+            return accountService.loginAccount(username, password);
+        } catch (AccountException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+        }
     }
 
     @PostMapping("/registration")
