@@ -2,7 +2,7 @@ package ru.tarasov.techservice.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import ru.tarasov.techservice.constants.BookingStatus;
+import ru.tarasov.techservice.constant.BookingStatus;
 
 import java.time.LocalDateTime;
 
@@ -10,6 +10,8 @@ import java.time.LocalDateTime;
 public record BookingResponseDTO(
         LocalDateTime bookingTime,
         BookingStatus status,
-        Long favorId
+        Long favorId,
+        Long userId,
+        Double discount
 ) {
 }

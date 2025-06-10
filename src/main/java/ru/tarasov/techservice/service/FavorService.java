@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import ru.tarasov.techservice.dto.FavorRequestDTO;
 import ru.tarasov.techservice.dto.FavorResponseDTO;
 import ru.tarasov.techservice.entity.Favor;
-import ru.tarasov.techservice.exceptions.FavorException;
+import ru.tarasov.techservice.exception.FavorException;
 import ru.tarasov.techservice.mapper.FavorMapper;
 import ru.tarasov.techservice.repository.FavorRepository;
 

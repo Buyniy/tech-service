@@ -18,7 +18,9 @@ public class BookingMapper {
         return new BookingResponseDTO(
                 booking.getBookingTime(),
                 booking.getStatus(),
-                booking.getFavor().getId()
+                booking.getFavor().getId(),
+                booking.getUser().getId(),
+                booking.getDiscount()
         );
     }
 }

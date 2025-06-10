@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.tarasov.techservice.dto.*;
-import ru.tarasov.techservice.exceptions.BookingException;
+import ru.tarasov.techservice.exception.BookingException;
 import ru.tarasov.techservice.service.BookingService;
 
 import java.net.URI;
